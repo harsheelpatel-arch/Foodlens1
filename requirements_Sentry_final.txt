@@ -1,0 +1,4 @@
+Flask
+requests
+gunicorn
+sentry-sdk[flask]>=2.44.0
