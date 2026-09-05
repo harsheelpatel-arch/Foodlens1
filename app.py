@@ -1,7 +1,6 @@
-import timehttps://github.com/shreyaaggarwal2041-droid/foodlenssacn/tree/main/template
+import time
 import urllib.parse
 import requests
-
 from flask import Flask, jsonify, render_template, request
 
 
