@@ -1,0 +1,433 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><meta name="theme-color" content="#0f766e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="FoodLens - scan a food barcode and understand its nutritional profile."><title>FoodLens — Know your food. Choose better.</title><style>:root{  --primary:#0f766e;  --primary-dark:#115e59;  --primary-light:#ccfbf1;  --accent:#f59e0b;  --bg:#f6f8f7;  --card:#ffffff;  --text:#17211f;  --muted:#66736f;  --border:#dfe7e4;  --danger:#dc2626;  --shadow:0 8px 28px rgba(20,40,35,.08);  --radius:18px;}*{box-sizing:border-box}html,body{margin:0;padding:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}body{min-height:100vh}button,input{font:inherit}button{cursor:pointer}.hidden{display:none!important}.app{  width:100%;  min-height:100vh;  display:flex;  justify-content:center;}.shell{  width:100%;  max-width:1100px;  min-height:100vh;  background:var(--bg);  position:relative;}.screen{  min-height:100vh;  padding:24px;}.center{  display:flex;  align-items:center;  justify-content:center;}.card{  background:var(--card);  border:1px solid var(--border);  border-radius:var(--radius);  box-shadow:var(--shadow);}button.primary{  border:0;  border-radius:14px;  background:var(--primary);  color:white;  padding:14px 20px;  font-weight:700;  min-height:48px;}button.primary:hover{background:var(--primary-dark)}button.secondary{  border:1px solid var(--border);  border-radius:14px;  background:white;  color:var(--text);  padding:13px 18px;  font-weight:700;  min-height:48px;}button.link{  border:0;background:transparent;color:var(--primary);font-weight:700;padding:8px}/* Welcome */.welcome{  min-height:100vh;  display:flex;  align-items:center;  justify-content:center;  padding:28px;}.welcome-card{  width:min(620px,100%);  text-align:center;  padding:42px 30px;}.logo{  width:76px;height:76px;border-radius:22px;  margin:0 auto 18px;  background:var(--primary);  color:#fff;  display:grid;place-items:center;  font-size:36px;  font-weight:800;}h1{font-size:clamp(30px,5vw,48px);margin:8px 0 10px}.subtitle{color:var(--muted);font-size:18px;line-height:1.55;margin:0 auto 28px;max-width:520px}.lang-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:22px}.lang{  border:1px solid var(--border);background:white;border-radius:999px;padding:9px 16px}.lang.active{background:var(--primary-light);border-color:var(--primary);color:var(--primary-dark);font-weight:700}.welcome-card .primary{width:min(360px,100%)}/* Header */.topbar{  display:flex;align-items:center;justify-content:space-between;gap:12px;  padding:8px 0 22px;}.brand{  display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px}.brand-mark{  width:40px;height:40px;border-radius:12px;background:var(--primary);color:#fff;display:grid;place-items:center}.top-actions{display:flex;gap:8px}.icon-btn{  width:44px;height:44px;border:1px solid var(--border);border-radius:13px;background:#fff}/* Home */.hero{  padding:28px;  display:grid;  grid-template-columns:1.4fr .8fr;  gap:24px;  align-items:center;  margin-bottom:20px;}.hero h2{font-size:clamp(26px,4vw,38px);margin:0 0 10px}.hero p{color:var(--muted);line-height:1.6;margin:0 0 20px}.scan-big{  width:100%;min-height:110px;border:0;border-radius:18px;background:var(--primary);color:white;  font-size:20px;font-weight:800;}.manual-card{padding:20px;margin-bottom:20px}.manual-row{display:flex;gap:10px}.manual-row input{  flex:1;min-width:0;border:1px solid var(--border);border-radius:13px;padding:14px 15px;outline:none}.manual-row input:focus{border-color:var(--primary)}.section-title{font-size:20px;margin:0 0 12px}.info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.info{  padding:18px;background:#fff;border:1px solid var(--border);border-radius:16px}.info b{display:block;margin-bottom:6px}.info span{color:var(--muted);font-size:14px;line-height:1.4}/* Scanner */.scanner-card{width:min(720px,100%);padding:20px}.scanner-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}.scanner-head h2{margin:0}.video-wrap{  position:relative;width:100%;aspect-ratio:4/3;background:#101514;border-radius:18px;overflow:hidden}#video{width:100%;height:100%;object-fit:cover}.scan-frame{  position:absolute;left:12%;right:12%;top:30%;height:40%;  border:3px solid #fff;border-radius:14px;box-shadow:0 0 0 9999px rgba(0,0,0,.28)}.scan-line{  position:absolute;left:15%;right:15%;top:50%;height:2px;background:#fff;opacity:.85}.scanner-status{text-align:center;color:var(--muted);margin:14px 0}.scanner-buttons{display:flex;gap:10px;flex-wrap:wrap}.scanner-buttons button{flex:1;min-width:150px}/* Result */.result-card{padding:24px}.result-top{display:flex;gap:20px;align-items:flex-start}.product-img{  width:150px;height:150px;object-fit:contain;background:#f8faf9;border-radius:16px;border:1px solid var(--border)}.product-meta{flex:1}.product-meta h2{margin:0 0 5px;font-size:30px}.brand-text{color:var(--muted);margin-bottom:15px}.score-box{  border-radius:18px;padding:18px;text-align:center;background:var(--primary-light);margin:20px 0}.score-number{font-size:48px;font-weight:900;color:var(--primary-dark);line-height:1}.score-label{font-weight:700;color:var(--primary-dark);margin-top:5px}.breakdown{  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.nutrient{  border:1px solid var(--border);border-radius:16px;padding:16px;background:#fff}.nutrient .emoji{font-size:23px}.nutrient h4{margin:8px 0 5px}.nutrient-value{font-size:14px;color:var(--muted)}.rating{font-weight:800;margin-top:7px}.recommendation{  padding:18px;border-left:5px solid var(--primary);background:#f0fdfa;border-radius:12px;line-height:1.55}.frequency{  margin-top:14px;padding:16px;border-radius:14px;background:#fffbeb;border:1px solid #fde68a}.extra-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}.extra{padding:16px;border:1px solid var(--border);border-radius:14px}.extra b{display:block;margin-bottom:5px}.extra span{color:var(--muted)}.result-actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}/* History */.history-list{display:grid;gap:10px}.history-item{  padding:16px;display:flex;justify-content:space-between;gap:12px;align-items:center}.history-item h4{margin:0 0 5px}.history-item p{margin:0;color:var(--muted);font-size:13px}.history-score{font-weight:900;color:var(--primary-dark);font-size:20px;white-space:nowrap}/* Profile */.profile-card{padding:24px}.profile-head{display:flex;align-items:center;gap:15px;margin-bottom:20px}.avatar{  width:64px;height:64px;border-radius:50%;background:var(--primary-light);color:var(--primary-dark);  display:grid;place-items:center;font-size:25px;font-weight:800}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.stat{padding:18px;text-align:center}.stat b{font-size:27px;display:block}.stat span{color:var(--muted);font-size:13px}/* Bottom navigation */.bottom-nav{  position:sticky;bottom:0;z-index:10;  display:grid;grid-template-columns:repeat(3,1fr);  gap:8px;padding:10px max(10px,env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom));  background:rgba(255,255,255,.96);border-top:1px solid var(--border);backdrop-filter:blur(12px)}.nav-btn{border:0;background:transparent;padding:9px;border-radius:12px;color:var(--muted);font-weight:700}.nav-btn.active{background:var(--primary-light);color:var(--primary-dark)}/* Loading/error */.loader{  position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:100;  display:grid;place-items:center;padding:20px}.loader-card{background:#fff;border-radius:18px;padding:28px;text-align:center;width:min(330px,100%)}.spinner{  width:42px;height:42px;border:4px solid #d7e5e1;border-top-color:var(--primary);border-radius:50%;  animation:spin .8s linear infinite;margin:0 auto 15px}@keyframes spin{to{transform:rotate(360deg)}}.toast{  position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:120;  background:#17211f;color:#fff;padding:12px 16px;border-radius:12px;max-width:min(90vw,500px);text-align:center}/* Responsive *//* ---------- Accessibility & result feedback UX ---------- */.accessibility-row{  display:flex;justify-content:center;align-items:center;gap:10px;  flex-wrap:wrap;margin:18px 0 22px;}body.text-large .result-feedback{  margin-top:18px;padding:18px;border:1px solid var(--border);  border-radius:16px;background:#fafcfb;}.result-feedback-title{font-weight:800;margin-bottom:10px}.result-feedback-actions{display:flex;gap:8px;flex-wrap:wrap}.result-feedback-actions button{  border:1px solid var(--border);background:#fff;border-radius:12px;  padding:10px 13px;font-weight:700;}.result-feedback-actions button.active{  background:var(--primary-light);border-color:var(--primary);color:var(--primary-dark);}.result-feedback textarea{  width:100%;min-height:75px;margin-top:10px;resize:vertical;  border:1px solid var(--border);border-radius:12px;padding:11px;outline:none;}.result-feedback textarea:focus{border-color:var(--primary)}/* ---------- FoodLens aesthetic refresh ---------- */:root{  --primary:#0b7a75;  --primary-dark:#075e5a;  --primary-light:#e6f7f4;  --accent:#f4a340;  --bg:#f3f7f6;  --card:#ffffff;  --text:#182321;  --muted:#6a7773;  --border:#e1e9e6;  --shadow:0 12px 35px rgba(16,45,40,.08);  --shadow-hover:0 16px 42px rgba(16,45,40,.13);  --radius:20px;}body{  background:    radial-gradient(circle at 5% 0%, rgba(11,122,117,.10), transparent 28%),    radial-gradient(circle at 95% 10%, rgba(244,163,64,.08), transparent 25%),    var(--bg);  color:var(--text);  letter-spacing:.01em;}.shell{  background:transparent;}.card{  border-color:rgba(225,233,230,.9);  box-shadow:var(--shadow);  transition:box-shadow .2s ease, transform .2s ease;}.card:hover{  box-shadow:var(--shadow-hover);}.logo,.brand-mark{  background:linear-gradient(145deg,#0b7a75,#075e5a);  box-shadow:0 8px 22px rgba(11,122,117,.22);}.logo{  border-radius:24px;}h1,h2,h3,h4{  letter-spacing:-.025em;}.primary{  box-shadow:0 7px 18px rgba(11,122,117,.18);}button.primary{  background:linear-gradient(135deg,#0b7a75,#096c67);}button.primary:hover{  background:linear-gradient(135deg,#096c67,#075e5a);  transform:translateY(-1px);}.secondary,.icon-btn,.accessibility-btn,.utility-btn,.feedback-option{  transition:all .18s ease;}.secondary:hover,.icon-btn:hover,.accessibility-btn:hover,.utility-btn:hover,.feedback-option:hover{  border-color:#b8d8d3;  transform:translateY(-1px);}.hero{  background:    linear-gradient(135deg,rgba(255,255,255,.98),rgba(248,252,251,.98));  overflow:hidden;  position:relative;}.hero:after{  content:"";  position:absolute;  width:230px;height:230px;border-radius:50%;  right:-90px;top:-90px;  background:rgba(11,122,117,.07);  pointer-events:none;}.scan-big{  background:linear-gradient(135deg,#0b7a75,#075e5a);  box-shadow:0 12px 28px rgba(11,122,117,.2);  transition:transform .2s ease,box-shadow .2s ease;}.scan-big:hover{  transform:translateY(-2px);  box-shadow:0 16px 32px rgba(11,122,117,.25);}.info{  background:rgba(255,255,255,.92);  transition:transform .18s ease,box-shadow .18s ease;}.info:hover{  transform:translateY(-2px);  box-shadow:0 8px 22px rgba(20,50,45,.08);}.info b{  color:var(--primary-dark);}.manual-card{  background:rgba(255,255,255,.96);}.manual-row input{  background:#fbfdfc;}.manual-row input:focus{  box-shadow:0 0 0 4px rgba(11,122,117,.09);}.bottom-nav{  box-shadow:0 -8px 25px rgba(20,40,35,.07);}.nav-btn{  transition:all .18s ease;}.nav-btn.active{  box-shadow:inset 0 0 0 1px rgba(11,122,117,.08);}.product-img{  background:linear-gradient(145deg,#f8fbfa,#eef5f3);}.score-box{  background:linear-gradient(135deg,#e8f8f5,#dff3ef);  border:1px solid #ccebe5;}.score-number{  text-shadow:0 3px 14px rgba(11,122,117,.12);}.nutrient{  transition:transform .18s ease,box-shadow .18s ease;}.nutrient:hover{  transform:translateY(-2px);  box-shadow:0 8px 22px rgba(20,50,45,.07);}.recommendation{  background:linear-gradient(135deg,#f0fbf9,#f7fcfb);}.frequency{  background:linear-gradient(135deg,#fffaf0,#fffdf7);}.utility-card{  background:rgba(255,255,255,.97);}.accessibility-row{  background:#f8fbfa;  border:1px solid var(--border);  border-radius:16px;  padding:9px 12px;  width:fit-content;  max-width:100%;  margin-left:auto;  margin-right:auto;}.welcome-card{  background:rgba(255,255,255,.97);  backdrop-filter:blur(8px);}.welcome-card .subtitle{  max-width:480px;}.modal-card{  border:1px solid var(--border);}.spinner{  box-shadow:0 4px 18px rgba(11,122,117,.08);}.toast{  box-shadow:0 10px 28px rgba(0,0,0,.18);}@media(max-width:760px){  .screen{padding:14px}  .hero{padding:22px 18px}  .manual-card{padding:18px}  .result-card{padding:18px}  .topbar{padding-bottom:16px}}@media(max-width:480px){  .welcome-card{padding:30px 17px}  .accessibility-row{width:100%;justify-content:center}  .scan-big{min-height:96px}  .info{padding:15px}}/* ---------- UX enhancements ---------- */.utility-card{padding:18px 20px;margin-top:20px}.utility-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.utility-btn{border:1px solid var(--border);background:#fff;border-radius:14px;padding:14px 15px;min-height:54px;text-align:left;font-weight:700;color:var(--text)}.utility-btn:hover{border-color:var(--primary);background:#f8fffd}.utility-btn .utility-icon{font-size:20px;margin-right:7px}.support-note{color:var(--muted);font-size:13px;line-height:1.5;margin:8px 0 0}.feedback-panel{padding:20px;margin-top:14px}.feedback-options{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}.feedback-option{border:1px solid var(--border);background:#fff;border-radius:12px;padding:11px 8px;font-weight:700}.feedback-option.active{border-color:var(--primary);background:var(--primary-light);color:var(--primary-dark)}.feedback-panel textarea{width:100%;min-height:90px;resize:vertical;border:1px solid var(--border);border-radius:12px;padding:12px;outline:none}.feedback-panel textarea:focus{border-color:var(--primary)}.modal{position:fixed;inset:0;z-index:200;background:rgba(15,23,20,.48);display:grid;place-items:center;padding:18px}.modal-card{width:min(520px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:20px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.18)}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.modal-head h3{margin:0}.close-modal{width:42px;height:42px;border:1px solid var(--border);border-radius:12px;background:#fff;font-size:18px}.help-list{display:grid;gap:10px;margin:16px 0}.help-item{padding:14px;border:1px solid var(--border);border-radius:13px;background:#fafcfb}.help-item b{display:block;margin-bottom:4px}.help-item span{color:var(--muted);font-size:14px;line-height:1.45}.footer-note{text-align:center;color:var(--muted);font-size:12px;line-height:1.5;padding:20px 8px 100px}@media(max-width:480px){.utility-grid{grid-template-columns:1fr}.feedback-options{grid-template-columns:1fr 1fr 1fr}}@media(max-width:760px){  .screen{padding:16px}  .hero{grid-template-columns:1fr;padding:20px}  .info-grid{grid-template-columns:repeat(2,1fr)}  .breakdown{grid-template-columns:repeat(2,1fr)}  .result-top{flex-direction:column}  .product-img{width:120px;height:120px}  .extra-grid{grid-template-columns:1fr}}@media(max-width:480px){  .welcome{padding:16px}  .welcome-card{padding:32px 18px}  .manual-row{flex-direction:column}  .manual-row button{width:100%}  .breakdown{grid-template-columns:1fr 1fr}  .scanner-card{padding:12px}  .scan-frame{left:8%;right:8%}  .stats{grid-template-columns:1fr 1fr 1fr}  .stat{padding:12px 5px}.stat b{font-size:22px}}@media(min-width:1101px){  .shell{box-shadow:0 0 40px rgba(20,40,35,.06)}}/* ---------- FINAL UI/UX POLISH — visual only ---------- */.welcome{position:relative;overflow:hidden;background:radial-gradient(circle at 20% 20%,rgba(11,122,117,.12),transparent 30%),radial-gradient(circle at 85% 75%,rgba(244,163,64,.14),transparent 30%);}.welcome:before{content:"🥑   🍎   🥕   🍋   🥦   🍓";position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:space-around;padding-top:8vh;font-size:clamp(24px,4vw,44px);opacity:.14;pointer-events:none;animation:foodFloat 9s ease-in-out infinite;}@keyframes foodFloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(18px) rotate(2deg)}}.welcome-card{position:relative;z-index:1;border:1px solid rgba(11,122,117,.14);box-shadow:0 24px 70px rgba(20,50,45,.14);border-radius:30px;padding:48px 34px;overflow:hidden;}.welcome-card:after{content:"";position:absolute;width:190px;height:190px;border-radius:50%;right:-90px;top:-90px;background:var(--primary-light);z-index:-1;}.welcome-card .logo{width:88px;height:88px;font-size:30px;border-radius:27px;margin-bottom:20px;}.font-size-value{font-size:12px;color:var(--muted);font-weight:800;min-width:42px;text-align:center;}#startBtn{position:relative;overflow:hidden;font-size:17px;letter-spacing:.01em;}#startBtn:after{content:"→";margin-left:10px;font-size:20px;}.hero{border-radius:28px;}.hero h2{font-size:clamp(30px,4.5vw,46px);letter-spacing:-.045em;}.hero p{max-width:680px;font-size:17px;}.scan-big{letter-spacing:.01em;}.info-grid{gap:15px;}.info{min-height:128px;}.bottom-nav{grid-template-columns:repeat(4,1fr);}.nav-btn{font-size:12px;line-height:1.25;}.nav-btn.active{background:var(--primary-light);}.result-card{border-radius:28px;}.result-top{padding-bottom:6px;}.score-box{border-radius:22px;}.did-subtitle{color:var(--muted);font-size:13px;margin-top:5px;padding-left:50px;}.fact-hero{display:flex;align-items:center;gap:20px;padding:25px;margin-bottom:18px;background:linear-gradient(135deg,#f0faf7,#fffaf1);}.fact-hero-icon{width:68px;height:68px;flex:none;border-radius:20px;background:#fff;border:1px solid var(--border);display:grid;place-items:center;font-size:34px;box-shadow:var(--shadow);}.fact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}.fact-card{padding:20px;transition:transform .18s ease,box-shadow .18s ease;}.fact-card:hover{transform:translateY(-3px);box-shadow:0 14px 35px rgba(20,50,45,.11);}.fact-card>span{font-size:28px;display:block;margin-bottom:9px;}.fact-card h3{margin-bottom:7px;}.fact-card p,.myth-card p{color:var(--muted);line-height:1.6;margin:0;}.myth-section{margin-top:28px;}.section-heading-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;}.myth-badge{background:#fff3d8;color:#8b641f;border:1px solid #ead4a8;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:800;}.myth-card{padding:19px;margin-bottom:11px;border-left:5px solid var(--gold);}.myth-label{display:inline-block;font-size:11px;font-weight:900;letter-spacing:.08em;color:#8b641f;background:#fff3d8;border-radius:7px;padding:5px 8px;margin-bottom:8px;}.ingredient-guide{padding:20px;margin-top:22px;}.ingredient-row{display:grid;grid-template-columns:170px 1fr;gap:15px;padding:14px 0;border-top:1px solid var(--border);}.ingredient-row b{color:var(--primary-dark);}.ingredient-row span{color:var(--muted);}.facts-read-btn{width:100%;margin-top:16px;}@media(max-width:650px){.fact-grid{grid-template-columns:1fr}.ingredient-row{grid-template-columns:1fr;gap:4px}.fact-hero{align-items:flex-start}.did-subtitle{padding-left:0}.welcome-card{padding:38px 20px}.hero h2{font-size:34px}.bottom-nav{padding-left:6px;padding-right:6px}.nav-btn{font-size:10px;padding:8px 3px;}}/* ---------- Colour sensitivity: meaning + text, not colour alone ---------- */.nutrient.nutrient-high{  border-color:#efb4b0;  background:#fff5f4;}.nutrient.nutrient-high .rating,.nutrient.nutrient-high .nutrient-value{color:#b42318;font-weight:800}.nutrient.nutrient-moderate{  border-color:#f0d39b;  background:#fffaf0;}.nutrient.nutrient-moderate .rating{color:#9a6700;font-weight:800}.nutrient.nutrient-good{  border-color:#b9ddc9;  background:#f3fbf6;}.nutrient.nutrient-good .rating{color:#176b45;font-weight:800}.nutrient.nutrient-neutral{background:#fff}.status-pill{  display:inline-flex;align-items:center;gap:6px;margin-top:8px;  padding:5px 9px;border-radius:999px;font-size:11px;font-weight:900;}.status-pill.high{background:#fee4e2;color:#b42318}.status-pill.moderate{background:#fff0cc;color:#8a5a00}.status-pill.good{background:#dff3e7;color:#176b45}.status-pill.neutral{background:#eef2f1;color:#66736f}.score-box.score-high{background:linear-gradient(135deg,#fff1f0,#fff8f7);border-color:#efb4b0}.score-box.score-high .score-number,.score-box.score-high .score-label{color:#b42318}.score-box.score-moderate{background:linear-gradient(135deg,#fff8e9,#fffdf7);border-color:#efd7a3}.score-box.score-moderate .score-number,.score-box.score-moderate .score-label{color:#9a6700}.score-box.score-good{background:linear-gradient(135deg,#eaf8f0,#f5fcf8);border-color:#c5e4d1}.score-box.score-good .score-number,.score-box.score-good .score-label{color:#176b45}.language-note{font-size:12px;color:var(--muted);text-align:center;margin:8px 0 0}
+/* =========================================================
+   FOODLENS FINAL VISUAL THEME
+   Functionality remains from the operational build.
+   ========================================================= */
+
+:root{
+  --cream:#FFF9E7;
+  --yellow:#F9D94C;
+  --teal:#39AFA5;
+  --black:#171717;
+  --white:#FFFFFF;
+  --grey:#666666;
+  --light:#F3F3F3;
+}
+
+body{
+  background:#e8e8e8;
+}
+
+.app{
+  max-width:480px;
+  min-height:100vh;
+  margin:0 auto;
+  background:var(--cream);
+}
+
+.shell{
+  max-width:480px;
+  min-height:100vh;
+  background:var(--cream);
+}
+
+#welcomeScreen{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  padding:18px 20px calc(30px + env(safe-area-inset-bottom));
+  background:var(--cream);
+  overflow:hidden;
+  animation:none;
+}
+
+.top-bar{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:relative;
+  z-index:20;
+}
+
+#welcomeScreen .logo{
+  width:auto;
+  height:auto;
+  margin:0;
+  background:none;
+  color:var(--black);
+  box-shadow:none;
+  border-radius:0;
+  font-size:22px;
+  font-weight:1000;
+  letter-spacing:2px;
+}
+
+#welcomeScreen .logo span{
+  color:var(--teal);
+}
+
+#welcomeScreen .language-button{
+  border:2px solid var(--black);
+  background:var(--white);
+  color:var(--black);
+  border-radius:50px;
+  min-height:42px;
+  padding:0 14px;
+  font-size:12px;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+.welcome-content{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  text-align:center;
+  padding-top:5px;
+  position:relative;
+  z-index:5;
+}
+
+.small-label{
+  color:var(--teal);
+  font-size:10px;
+  font-weight:1000;
+  letter-spacing:2px;
+  margin-bottom:8px;
+}
+
+.welcome-title{
+  font-size:clamp(40px,12vw,50px);
+  line-height:.92;
+  letter-spacing:-3px;
+  font-weight:1000;
+  margin:0;
+}
+
+.welcome-title span{color:var(--teal)}
+
+.illustration{
+  position:relative;
+  width:100%;
+  height:295px;
+  margin:5px auto;
+}
+
+.yellow-circle{
+  position:absolute;
+  width:250px;
+  height:250px;
+  border-radius:50%;
+  background:var(--yellow);
+  left:50%;
+  top:18px;
+  transform:translateX(-50%);
+}
+
+.phone{
+  position:absolute;
+  width:135px;
+  height:250px;
+  left:50%;
+  top:18px;
+  transform:translateX(-50%) rotate(4deg);
+  background:var(--black);
+  border-radius:25px;
+  padding:7px;
+  z-index:5;
+}
+
+.phone-screen{
+  width:100%;
+  height:100%;
+  border-radius:19px;
+  background:var(--cream);
+  padding:18px 10px;
+}
+
+.phone-logo{font-size:10px;font-weight:1000}
+
+.phone-card{
+  background:var(--white);
+  border-radius:14px;
+  margin-top:27px;
+  padding:13px 5px;
+  text-align:center;
+}
+
+.phone-food{font-size:32px}
+
+.phone-score{
+  color:#35A866;
+  font-size:28px;
+  font-weight:1000;
+}
+
+.phone-small{font-size:6px;font-weight:900}
+
+.person{
+  position:absolute;
+  bottom:0;
+  z-index:8;
+}
+
+.person.left{left:2px}
+.person.right{right:2px}
+
+.person-head{
+  width:55px;
+  height:55px;
+  background:#F47B20;
+  border-radius:50%;
+  position:relative;
+}
+
+.person-hair{
+  position:absolute;
+  width:55px;
+  height:24px;
+  top:0;
+  background:var(--black);
+  border-radius:50px 50px 5px 5px;
+}
+
+.person-body{
+  width:76px;
+  height:80px;
+  margin-left:-10px;
+  background:var(--teal);
+  border-radius:45px 45px 0 0;
+}
+
+.food{
+  position:absolute;
+  font-size:29px;
+  z-index:12;
+  animation:floating 3.5s ease-in-out infinite;
+}
+
+.food.one{left:7%;top:35px}
+.food.two{right:7%;top:50px}
+.food.three{left:12%;bottom:22px}
+.food.four{right:10%;bottom:25px}
+
+@keyframes floating{
+  0%,100%{transform:translateY(0) rotate(-5deg)}
+  50%{transform:translateY(-10px) rotate(6deg)}
+}
+
+
+
+#startBtn{
+  width:100%;
+  min-height:56px;
+  border:none;
+  border-radius:15px;
+  background:var(--teal);
+  color:var(--black);
+  font-size:15px;
+  font-weight:1000;
+  margin-top:12px;
+  box-shadow:0 5px 0 rgba(0,0,0,.10);
+}
+
+#startBtn:after{content:none}
+
+#startBtn:active{
+  transform:translateY(2px);
+  box-shadow:none;
+}
+
+/* Give the operational screens the same final palette without changing their structure. */
+#mainApp{
+  background:var(--cream);
+}
+
+#mainApp .topbar{
+  background:var(--cream);
+}
+
+#mainApp .brand{
+  font-weight:1000;
+  letter-spacing:.02em;
+}
+
+#mainApp .brand-mark{
+  background:var(--teal);
+  border-radius:12px;
+}
+
+#mainApp .hero,
+#mainApp .manual-card,
+#mainApp .scanner-card,
+#mainApp .result-card,
+#mainApp .card{
+  border-color:rgba(23,23,23,.10);
+  box-shadow:0 12px 35px rgba(16,45,40,.08);
+}
+
+#mainApp .scan-big,
+#mainApp button.primary{
+  background:var(--teal);
+  color:var(--black);
+  border-radius:15px;
+}
+
+#mainApp .score-box{
+  background:#E6F7F4;
+}
+
+#mainApp .bottom-nav{
+  background:rgba(255,255,255,.96);
+}
+
+#mainApp .nav-btn.active{
+  background:#E6F7F4;
+  color:#075e5a;
+}
+
+@media(max-width:480px){
+  #welcomeScreen{
+    padding:18px 20px calc(30px + env(safe-area-inset-bottom));
+  }
+}
+
+
+/* ---------- FINAL POLISH: alignment + language control ---------- */
+.shell{max-width:520px;width:100%;margin:0 auto;overflow-x:hidden}
+.screen{width:100%;max-width:520px;margin:0 auto;overflow-x:hidden;padding-left:18px;padding-right:18px}
+.topbar{width:100%;align-items:center;min-width:0}
+.topbar>div:first-child{min-width:0}
+.top-actions,.screen-tools{display:flex;align-items:center;gap:7px;flex-shrink:0}
+.screen-tool{border:1.5px solid var(--black,#171717);background:#fff;border-radius:999px;min-height:40px;padding:8px 11px;font-size:12px;font-weight:800;white-space:nowrap;color:#171717}
+.screen-tool.language-tool{border-color:#171717}
+.screen-tool.stop-tool{background:#171717;color:#fff;border-color:#171717}
+.screen-tool:active{transform:scale(.98)}
+.result-card{width:100%;max-width:100%;overflow:hidden}
+.result-top{width:100%;min-width:0}
+.product-meta{min-width:0;overflow-wrap:anywhere}
+.product-meta h2{overflow-wrap:anywhere}
+.breakdown{width:100%;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.nutrient{min-width:0;overflow:hidden;padding:14px}
+.nutrient-value,.rating{overflow-wrap:anywhere}
+.extra-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.scanner-card{width:100%;max-width:100%}
+.hero{width:100%;max-width:100%;min-width:0}
+.hero>div{min-width:0}
+.info-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.fact-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.utility-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.bottom-nav{width:100%;max-width:520px;margin:0 auto}
+
+
+@media(max-width:480px){
+  .screen{padding-left:14px;padding-right:14px}
+  .topbar{gap:7px}
+  .brand{font-size:19px;gap:7px}
+  .brand-mark{width:36px;height:36px;border-radius:11px}
+  .screen-tools{gap:5px}
+  .screen-tool{min-height:36px;padding:7px 9px;font-size:11px}
+  .screen-tool .tool-label{display:none}
+  .screen-tool.language-tool .tool-label{display:inline}
+  .result-top{flex-direction:row;align-items:center;gap:12px}
+  .product-img{width:108px;height:108px;flex:none}
+  .product-meta h2{font-size:25px}
+  .breakdown{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .nutrient{padding:12px}
+  .nutrient h4{font-size:15px}
+  .nutrient-value,.rating{font-size:13px}
+  .fact-grid,.utility-grid{grid-template-columns:1fr}
+}
+</style></head><body><div class="app"><div class="shell">  <!-- WELCOME --><section class="screen active" id="welcomeScreen"><!-- TOP --><div class="top-bar"><div class="logo">            FOOD<span>LENS</span></div><!-- LANGUAGE IS ON FIRST SCREEN --><button class="language-button" id="languageButton" type="button" onclick="toggleVisualLanguage()">            🌐 English        </button></div>
+<div id="operationalLanguageChoices" aria-hidden="true"
+     style="position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none">
+  <button class="lang active" data-lang="en" type="button">English</button>
+  <button class="lang" data-lang="hi" type="button">हिन्दी</button>
+</div><!-- WELCOME --><div class="welcome-content"><div class="small-label">            FOOD • MADE SIMPLE        </div><h1 class="welcome-title" id="welcomeTitle">            Know your food.            <br/><span>Choose better.</span></h1><!-- ILLUSTRATION --><div class="illustration"><div class="yellow-circle"></div><!-- FLOATING FOOD --><div class="food one">                🍪            </div><div class="food two">                🍎            </div><div class="food three">                🍫            </div><div class="food four">                🥤            </div><!-- PHONE --><div class="phone"><div class="phone-screen"><div class="phone-logo">                        FOODLENS                    </div><div class="phone-card"><div class="phone-food">                            🍪                        </div><div class="phone-score">                            7.2                        </div><div class="phone-small">                            FOODLENS SCORE                        </div></div></div></div><!-- PERSON 1 --><div class="person left"><div class="person-head"><div class="person-hair"></div></div><div class="person-body"></div></div><!-- PERSON 2 --><div class="person right"><div class="person-head"><div class="person-hair"></div></div><div class="person-body"></div></div></div><!-- READ ALOUD --><!-- FIRST SCREEN ENDS HERE --><button class="primary-button" id="startBtn" >            LET'S GET STARTED →        </button></div></section><!-- ===================================================     SCREEN 2 — LOGIN=================================================== -->
+<!-- MAIN APP -->  <div id="mainApp" class="hidden">    <main id="homeScreen" class="screen">      <header class="topbar">        <div class="brand"><div class="brand-mark">FL</div><span>FoodLens</span></div>        <div class="top-actions">                  </div>      </header>      <section class="hero card">        <div>          <div style="display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border-radius:999px;background:var(--primary-light);color:var(--primary-dark);font-size:12px;font-weight:800;margin-bottom:12px">● FOODLENS</div>          <h2>Know what's in your food.</h2>          <p>Scan a product barcode to get its FoodLens Score, nutrient breakdown and an easy-to-understand recommendation.</p>          <button id="scanBtn" class="scan-big">📷 Scan a Product</button>        </div>        <div class="card" style="padding:22px;background:var(--primary-light);border-color:#99f6e4">          <div style="font-size:42px">🥗</div>          <h3 style="margin:8px 0">FoodLens Score</h3>          <p style="margin:0;color:var(--muted);line-height:1.5">A simple 1–10 score based on sugar, sodium, fibre and protein.</p>        </div>      </section>      <section class="manual-card card">        <h3 class="section-title">Enter barcode manually</h3>        <div class="manual-row">          <input id="barcodeInput" inputmode="numeric" autocomplete="off" placeholder="e.g. 8901234567890" aria-label="Barcode">          <button id="lookupBtn" class="primary">Look Up</button>        </div>      </section>      <h3 class="section-title">What FoodLens checks</h3>      <section class="info-grid">        <div class="info"><b>🍬 Sugar</b><span>Higher sugar lowers the component score.</span></div>        <div class="info"><b>🧂 Sodium</b><span>Higher sodium lowers the component score.</span></div>        <div class="info"><b>🌾 Fibre</b><span>More fibre contributes positively.</span></div>        <div class="info"><b>💪 Protein</b><span>Protein contribution is assessed from energy.</span></div>      </section>    </main>    <!-- SCANNER -->    <main id="scannerScreen" class="screen hidden">      <div class="scanner-card card">        <div class="scanner-head">          <h2>Scan Barcode</h2>          <button class="icon-btn" id="closeScanner" aria-label="Close scanner">✕</button>        </div>        <div class="video-wrap">          <video id="video" autoplay playsinline muted></video>          <div class="scan-frame"></div>          <div class="scan-line"></div>        </div>        <p id="scannerStatus" class="scanner-status">Starting camera…</p>        <div class="scanner-buttons">          <button class="secondary" id="cameraRetry">🔄 Restart Camera</button>          <button class="secondary" id="manualFromScanner">⌨️ Enter Manually</button>        </div>      </div>    </main>    <!-- RESULT -->    <main id="resultScreen" class="screen hidden">      <div class="result-card card">        <div class="result-top">          <img id="productImage" class="product-img" alt="Product image" style="display:none">          <div class="product-meta">            <h2 id="productName">Product</h2>            <div id="productBrand" class="brand-text"></div>            <div id="productBarcode" class="brand-text"></div>          </div>        </div>        <div class="score-box">          <div id="scoreNumber" class="score-number">—</div>          <div class="score-label">FOODLENS SCORE / 10</div>          <div id="scoreCategory" style="margin-top:7px;font-weight:800"></div>        </div>        <h3 class="section-title">Nutrition breakdown</h3>        <div class="breakdown">          <div class="nutrient">            <div class="emoji">🍬</div>            <h4>Sugar</h4>            <div id="sugarValue" class="nutrient-value">Unavailable</div>            <div id="sugarRating" class="rating">Unavailable</div>          </div>          <div class="nutrient">            <div class="emoji">🧂</div>            <h4>Sodium</h4>            <div id="sodiumValue" class="nutrient-value">Unavailable</div>            <div id="sodiumRating" class="rating">Unavailable</div>          </div>          <div class="nutrient">            <div class="emoji">🌾</div>            <h4>Fibre</h4>            <div id="fibreValue" class="nutrient-value">Unavailable</div>            <div id="fibreRating" class="rating">Unavailable</div>          </div>          <div class="nutrient">            <div class="emoji">💪</div>            <h4>Protein</h4>            <div id="proteinValue" class="nutrient-value">Unavailable</div>            <div id="proteinRating" class="rating">Unavailable</div>          </div>        </div>        <div class="recommendation">          <strong>Overall recommendation</strong>          <div id="recommendationText" style="margin-top:7px">—</div>        </div>        <div class="frequency">          <strong>Consumption guidance</strong>          <div id="frequencyText" style="margin-top:5px">—</div>        </div>        <div class="result-feedback">          <div class="result-feedback-title">Was this result helpful?</div>          <div class="result-feedback-actions">            <button type="button" data-result-feedback="Helpful">👍 Helpful</button>            <button type="button" data-result-feedback="Not quite">👎 Not quite</button>            <button type="button" data-result-feedback="Report issue">⚠️ Report issue</button>          </div>          <textarea id="resultFeedbackText" placeholder="Optional: tell us what we could improve."></textarea>          <button type="button" class="secondary" id="sendResultFeedback" style="margin-top:10px;width:100%">Send feedback</button>        </div>        <div class="extra-grid">          <div class="extra"><b>Calories</b><span id="caloriesValue">Unavailable</span></div>          <div class="extra"><b>Carbohydrates</b><span id="carbsValue">Unavailable</span></div>          <div class="extra"><b>Total fat</b><span id="fatValue">Unavailable</span></div>          <div class="extra"><b>Serving size</b><span id="servingValue">Unavailable</span></div>        </div>        <div class="result-actions">          <button id="scanAnother" class="primary">📷 Scan Another</button>          <button id="backHome" class="secondary">← Back Home</button>        </div>      </div>    </main>    <!-- HISTORY -->    <main id="historyScreen" class="screen hidden">      <header class="topbar">        <div><h2 style="margin:0">Scan History</h2><div style="color:var(--muted);margin-top:4px">Your recent FoodLens results</div></div>        <button id="clearHistory" class="secondary">Clear</button>      </header>      <div id="historyList" class="history-list"></div>      <div id="emptyHistory" class="card" style="padding:35px;text-align:center;color:var(--muted)">        No scans yet. Scan your first product to see it here.      </div>    </main>    <!-- DID YOU KNOW -->    <main id="didYouKnowScreen" class="screen hidden">      <div class="topbar">        <div>          <div class="brand"><div class="brand-mark">FL</div><span>Did You Know?</span></div>          <div class="did-subtitle">Small food facts. Better understanding.</div>        </div>              </div>      <section class="fact-hero card">        <div class="fact-hero-icon">💡</div>        <div>          <div class="eyebrow">FOOD KNOWLEDGE</div>          <h2>Look beyond the front of the pack.</h2>          <p>Ingredients and nutrition labels can tell you much more than a product's marketing claims.</p>        </div>      </section>      <section class="fact-grid">        <article class="fact-card card"><span>🍬</span><h3>Added sugar</h3><p>Sugar can appear under different names in ingredient lists. Check the ingredient list as well as the nutrition panel.</p></article>        <article class="fact-card card"><span>🌾</span><h3>Fibre matters</h3><p>Fibre is listed separately on nutrition labels and can help you compare products with similar calories.</p></article>        <article class="fact-card card"><span>🧂</span><h3>Sodium is not just “salt”</h3><p>Sodium can come from several ingredients. The nutrition panel gives you the amount per serving or per 100 g.</p></article>        <article class="fact-card card"><span>🥣</span><h3>Serving size changes the story</h3><p>Compare products using the same basis, such as per 100 g, before deciding which one has more of a nutrient.</p></article>      </section>      <section class="myth-section">        <div class="section-heading-row"><div><div class="eyebrow">MYTH BUSTING</div><h2>Myth or fact?</h2></div><span class="myth-badge">Let's check</span></div>        <article class="myth-card card"><div class="myth-label">MYTH</div><h3>“Low sugar” automatically means healthy.</h3><p><strong>Fact:</strong> One nutrient does not tell the whole story. FoodLens looks at multiple parts of the nutritional profile.</p></article>        <article class="myth-card card"><div class="myth-label">MYTH</div><h3>“Natural” means the product is automatically better.</h3><p><strong>Fact:</strong> Marketing words should not replace checking the ingredient list and nutrition information.</p></article>        <article class="myth-card card"><div class="myth-label">MYTH</div><h3>Shorter ingredient names always mean a healthier product.</h3><p><strong>Fact:</strong> Ingredients should be understood in context. The nutrition panel and overall product profile matter too.</p></article>      </section>      <section class="ingredient-guide card">        <div class="section-heading-row"><div><div class="eyebrow">INGREDIENT GUIDE</div><h2>What do these words mean?</h2></div></div>        <div class="ingredient-row"><b>Emulsifier</b><span>Helps ingredients such as water and oil stay mixed.</span></div>        <div class="ingredient-row"><b>Leavening agent</b><span>Helps dough or batter rise.</span></div>        <div class="ingredient-row"><b>Fortified</b><span>Means selected vitamins or minerals have been added to the food.</span></div>        <div class="ingredient-row"><b>Flavouring</b><span>Used to provide or enhance flavour in a product.</span></div>      </section>          </main>    <!-- PROFILE -->    <main id="profileScreen" class="screen hidden">      <div class="profile-card card">        <div class="profile-head">          <div id="avatar" class="avatar">G</div>          <div>            <h2 id="profileName" style="margin:0">Guest</h2>            <p id="profileEmail" style="margin:4px 0;color:var(--muted)">Local profile</p>          </div>        </div>        <div class="stats">          <div class="stat"><b id="scanCount">0</b><span>Scans</span></div>          <div class="stat"><b id="avgScore">—</b><span>Average score</span></div>          <div class="stat"><b id="bestScore">—</b><span>Best score</span></div>        </div>        <div class="recommendation" style="margin-top:20px">          <strong>FoodLens guidance</strong>          <div id="profileGuidance" style="margin-top:7px">            Scan products to build your personal history.          </div>        </div>        <div class="utility-card card" style="margin-top:18px;box-shadow:none">          <h3 class="section-title">More</h3>          <div class="utility-grid">                        <button class="utility-btn" id="feedbackBtn"><span class="utility-icon">💬</span>Give feedback</button>            <button class="utility-btn" id="supportBtn"><span class="utility-icon">🛠️</span>Contact tech support</button>            <button class="utility-btn" id="languageBtn"><span class="utility-icon">🇮🇳</span>हिन्दी / English</button>          </div>          <p class="support-note">Your feedback helps us improve FoodLens. No login is required.</p>        </div>      </div>    </main>    <nav class="bottom-nav">      <button class="nav-btn active" data-screen="homeScreen">🏠<br>Home</button>      <button class="nav-btn" data-screen="historyScreen">🕘<br>History</button>      <button class="nav-btn" data-screen="didYouKnowScreen">💡<br>Did You Know</button>      <button class="nav-btn" data-screen="profileScreen">👤<br>Profile</button>    </nav>  </div></div></div><div id="feedbackModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">  <div class="modal-card">    <div class="modal-head">      <h3 id="feedbackTitle">Share your feedback</h3>      <button class="close-modal" id="closeFeedback" aria-label="Close">✕</button>    </div>    <p style="color:var(--muted);line-height:1.5;margin-top:8px">How was your FoodLens experience?</p>    <div class="feedback-options">      <button class="feedback-option" data-feedback="Loved it">😊 Great</button>      <button class="feedback-option" data-feedback="It was okay">🙂 Okay</button>      <button class="feedback-option" data-feedback="Needs improvement">🙁 Needs work</button>    </div>    <textarea id="feedbackText" placeholder="Tell us what worked well or what we should improve..."></textarea>    <div style="display:flex;gap:10px;margin-top:12px">      <button class="primary" id="sendFeedback" style="flex:1">Send Feedback</button>      <button class="secondary" id="cancelFeedback">Cancel</button>    </div>  </div></div><div id="supportModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="supportTitle">  <div class="modal-card">    <div class="modal-head">      <h3 id="supportTitle">FoodLens Tech Support</h3>      <button class="close-modal" id="closeSupport" aria-label="Close">✕</button>    </div>    <p style="color:var(--muted);line-height:1.5">If something is not working, try these quick checks before contacting the project team.</p>    <div class="help-list">      <div class="help-item"><b>📷 Camera not opening</b><span>Make sure your browser has camera permission and open FoodLens using the HTTPS web address.</span></div>      <div class="help-item"><b>🔎 Product not found</b><span>Check that all barcode digits are correct, then try manual lookup again.</span></div>      <div class="help-item"><b>🌐 Connection problem</b><span>Check your internet connection and try again after a few seconds.</span></div>    </div>    <button class="primary" id="copySupportInfo" style="width:100%">Copy support information</button>    <p class="support-note" id="supportStatus"></p>  </div></div><div id="loader" class="loader hidden">  <div class="loader-card">    <div class="spinner"></div>    <strong>Checking food information…</strong>    <p style="color:var(--muted);margin-bottom:0">Please wait.</p>  </div></div><div id="toast" class="toast hidden"></div><script>"use strict";/*  FoodLens frontend  Backend contract:      GET /get_food_data?query=BARCODE  Expected response:      {        barcode,        name,        brand,        image,        ingredients,        foodlens: {          score,          category,          breakdown: {            sugar:  {score, rating, value, unit},            sodium: {score, rating, value, unit},            fibre:  {score, rating, value, unit},            protein:{score, rating, value, unit}          },          recommendation        },        nutrition: {...},        serving_size: {available, display, value_g}        consumption_guidance: {display, frequency, period}      }*/const $ = id => document.getElementById(id);let currentStream = null;let scannerRunning = false;let barcodeDetector = null;let scanLoopId = null;let currentLanguage = "en";/* ---------- Local storage ---------- */function getHistory(){  try{    return JSON.parse(localStorage.getItem("foodlens_history") || "[]");  }catch(e){    return [];  }}function saveHistory(item){  const history = getHistory();  history.unshift(item);  localStorage.setItem("foodlens_history", JSON.stringify(history.slice(0,20)));}/* ---------- UI ---------- */function showLoader(show){  $("loader").classList.toggle("hidden", !show);}function toast(message){  $("toast").textContent = message;  $("toast").classList.remove("hidden");  clearTimeout(window.__toastTimer);  window.__toastTimer = setTimeout(() => $("toast").classList.add("hidden"), 3000);}function showScreen(id){  ["homeScreen","scannerScreen","resultScreen","historyScreen","didYouKnowScreen","profileScreen"]    .forEach(x => { if($(x)) $(x).classList.add("hidden"); });  $(id).classList.remove("hidden");  document.querySelectorAll(".nav-btn").forEach(btn => {    btn.classList.toggle("active", btn.dataset.screen === id);  });  window.scrollTo({top:0,behavior:"smooth"});}/* ---------- Language ---------- */const languageText = {  en:{    start:"Continue to FoodLens",    welcomeTitle:"FoodLens",    welcomeSubtitle:"Know your food. Choose better.",    welcomeDescription:"Scan a barcode or enter it manually to view nutritional guidance.",    smartGuidance:"Smart food guidance",    home:"Home", history:"History", didYouKnow:"Did You Know", profile:"Profile",    knowFood:"Know what's in your food.",    heroText:"Scan a product barcode to get its FoodLens Score, nutrient breakdown and an easy-to-understand recommendation.",    scoreInfo:"A simple 1–10 score based on sugar, sodium, fibre and protein.",    manualTitle:"Enter barcode manually", lookup:"Look Up", scanProduct:"📷 Scan a Product",    checks:"What FoodLens checks", sugar:"Sugar", sodium:"Sodium", fibre:"Fibre", protein:"Protein",    sugarInfo:"Higher sugar lowers the component score.", sodiumInfo:"Higher sodium lowers the component score.",    fibreInfo:"More fibre contributes positively.", proteinInfo:"Protein contribution is assessed from energy.",    scanBarcode:"Scan Barcode", startingCamera:"Starting camera…", scanning:"Scanning… point the camera at the barcode.",    restartCamera:"🔄 Restart Camera", enterManually:"⌨️ Enter Manually", close:"Close",    nutrition:"Nutrition breakdown", recommendation:"Overall recommendation", consumption:"Consumption guidance",    calories:"Calories", carbohydrates:"Carbohydrates", totalFat:"Total fat", serving:"Serving size",    scanAnother:"📷 Scan Another", backHome:"← Back Home", feedbackHelpful:"Was this result helpful?",    helpful:"👍 Helpful", notQuite:"👎 Not quite", reportIssue:"⚠️ Report issue", sendFeedback:"Send feedback",    optionalComment:"Optional: tell us what we could improve.", scans:"Scans", averageScore:"Average score", bestScore:"Best score",    scanHistory:"Scan History", recentResults:"Your recent FoodLens results", clear:"Clear",    noScans:"No scans yet. Scan your first product to see it here.",    factsSubtitle:"Small food facts. Better understanding.", foodKnowledge:"FOOD KNOWLEDGE",    factTitle:"Look beyond the front of the pack.", factIntro:"Ingredients and nutrition labels can tell you much more than a product's marketing claims.",    mythBusting:"MYTH BUSTING", mythFact:"Myth or fact?", letsCheck:"Let's check",    ingredientGuide:"INGREDIENT GUIDE", ingredientTitle:"What do these words mean?",    more:"More", feedback:"Give feedback", support:"Contact tech support", language:"हिन्दी / English",    guidanceTitle:"FoodLens guidance", localProfile:"Local profile", guest:"Guest",    high:"High", moderate:"Moderate", good:"Favourable", unavailable:"Unavailable", limit:"Consider limiting", compare:"Compare",    facts:[      ["Added sugar","Sugar can appear under different names in ingredient lists. Check the ingredient list as well as the nutrition panel."],      ["Fibre matters","Fibre is listed separately on nutrition labels and can help you compare products with similar calories."],      ["Sodium is not just “salt”","Sodium can come from several ingredients. The nutrition panel gives you the amount per serving or per 100 g."],      ["Serving size changes the story","Compare products using the same basis, such as per 100 g, before deciding which one has more of a nutrient."]    ],    myths:[      ["“Low sugar” automatically means healthy.","Fact: One nutrient does not tell the whole story. FoodLens looks at multiple parts of the nutritional profile."],      ["“Natural” means the product is automatically better.","Fact: Marketing words should not replace checking the ingredient list and nutrition information."],      ["Shorter ingredient names always mean a healthier product.","Fact: Ingredients should be understood in context. The nutrition panel and overall product profile matter too."]    ],    ingredients:[      ["Emulsifier","Helps ingredients such as water and oil stay mixed."],      ["Leavening agent","Helps dough or batter rise."],      ["Fortified","Means selected vitamins or minerals have been added to the food."],      ["Flavouring","Used to provide or enhance flavour in a product."]    ],    welcomeAudio:"Welcome to FoodLens. Choose your language and then continue to FoodLens. You can scan a barcode to understand your food."  },  hi:{    start:"FoodLens पर जाएँ",    welcomeTitle:"FoodLens",    welcomeSubtitle:"अपने भोजन को जानें। बेहतर चुनें।",    welcomeDescription:"पोषण संबंधी जानकारी देखने के लिए बारकोड स्कैन करें या उसे मैन्युअल रूप से दर्ज करें।",    smartGuidance:"स्मार्ट फूड गाइडेंस",    home:"होम", history:"इतिहास", didYouKnow:"क्या आप जानते हैं?", profile:"प्रोफ़ाइल",    knowFood:"जानिए आपके भोजन में क्या है।",    heroText:"उत्पाद का बारकोड स्कैन करके FoodLens स्कोर, पोषक तत्वों की जानकारी और आसान सुझाव पाएँ।",    scoreInfo:"शुगर, सोडियम, फाइबर और प्रोटीन के आधार पर 1–10 का सरल स्कोर।",    manualTitle:"बारकोड मैन्युअली दर्ज करें", lookup:"देखें", scanProduct:"📷 उत्पाद स्कैन करें",    checks:"FoodLens क्या जाँचता है", sugar:"शुगर", sodium:"सोडियम", fibre:"फाइबर", protein:"प्रोटीन",    sugarInfo:"अधिक शुगर से इस घटक का स्कोर कम होता है।", sodiumInfo:"अधिक सोडियम से इस घटक का स्कोर कम होता है।",    fibreInfo:"अधिक फाइबर सकारात्मक योगदान देता है।", proteinInfo:"प्रोटीन के योगदान का आकलन ऊर्जा के आधार पर किया जाता है।",    scanBarcode:"बारकोड स्कैन करें", startingCamera:"कैमरा शुरू हो रहा है…", scanning:"स्कैन हो रहा है… कैमरे को बारकोड की ओर रखें।",    restartCamera:"🔄 कैमरा फिर शुरू करें", enterManually:"⌨️ मैन्युअली दर्ज करें", close:"बंद करें",    nutrition:"पोषण संबंधी जानकारी", recommendation:"कुल सुझाव", consumption:"सेवन संबंधी सलाह",    calories:"कैलोरी", carbohydrates:"कार्बोहाइड्रेट", totalFat:"कुल वसा", serving:"सर्विंग आकार",    scanAnother:"📷 दूसरा उत्पाद स्कैन करें", backHome:"← होम पर जाएँ", feedbackHelpful:"क्या यह परिणाम उपयोगी था?",    helpful:"👍 उपयोगी", notQuite:"👎 पूरी तरह नहीं", reportIssue:"⚠️ समस्या बताएँ", sendFeedback:"फीडबैक भेजें",    optionalComment:"वैकल्पिक: बताएं कि हम क्या बेहतर कर सकते हैं।", scans:"स्कैन", averageScore:"औसत स्कोर", bestScore:"सबसे अच्छा स्कोर",    scanHistory:"स्कैन इतिहास", recentResults:"आपके हाल के FoodLens परिणाम", clear:"साफ़ करें",    noScans:"अभी कोई स्कैन नहीं है। पहला उत्पाद स्कैन करें और वह यहाँ दिखाई देगा।",    factsSubtitle:"छोटी-छोटी खाद्य जानकारी। बेहतर समझ।", foodKnowledge:"खाद्य जानकारी",    factTitle:"पैक के सामने लिखी बातों से आगे देखें।", factIntro:"सामग्री और पोषण लेबल किसी उत्पाद के मार्केटिंग दावों से कहीं अधिक जानकारी दे सकते हैं।",    mythBusting:"मिथक की जाँच", mythFact:"मिथक या तथ्य?", letsCheck:"आइए जाँचते हैं",    ingredientGuide:"सामग्री गाइड", ingredientTitle:"इन शब्दों का क्या मतलब है?",    more:"और विकल्प", feedback:"फीडबैक दें", support:"टेक सपोर्ट से संपर्क", language:"English / हिन्दी",    guidanceTitle:"FoodLens सलाह", localProfile:"स्थानीय प्रोफ़ाइल", guest:"अतिथि",    high:"अधिक", moderate:"मध्यम", good:"अनुकूल", unavailable:"उपलब्ध नहीं", limit:"कम मात्रा में लें", compare:"तुलना करें",    facts:[      ["Added sugar","शुगर कई अलग-अलग नामों से ingredient list में दिखाई दे सकती है। nutrition panel के साथ ingredient list भी देखें।"],      ["Fibre matters","फाइबर nutrition label में अलग से दिया जाता है और समान कैलोरी वाले उत्पादों की तुलना करने में मदद कर सकता है।"],      ["Sodium is not just “salt”","सोडियम कई ingredients से आ सकता है। nutrition panel में serving या 100 g के आधार पर इसकी मात्रा देखें।"],      ["Serving size changes the story","तुलना करते समय समान आधार, जैसे 100 g, का उपयोग करें ताकि पोषक तत्वों की मात्रा को सही तरीके से समझ सकें।"]    ],    myths:[      ["“Low sugar” automatically means healthy.","तथ्य: केवल एक nutrient पूरी तस्वीर नहीं बताता। FoodLens nutritional profile के कई हिस्सों को देखता है।"],      ["“Natural” means the product is automatically better.","तथ्य: marketing words को ingredient list और nutrition information की जगह नहीं लेना चाहिए।"],      ["Shorter ingredient names always mean a healthier product.","तथ्य: ingredients को context में समझना चाहिए। nutrition panel और पूरे product profile को भी देखें।"]    ],    ingredients:[      ["Emulsifier","पानी और तेल जैसे ingredients को एक साथ mixed रखने में मदद करता है।"],      ["Leavening agent","dough या batter को फूलने में मदद करता है।"],      ["Fortified","इसका मतलब है कि food में कुछ selected vitamins या minerals जोड़े गए हैं।"],      ["Flavouring","product का flavour देने या बढ़ाने के लिए इस्तेमाल किया जाता है।"]    ]  }};function setText(selector, value){ const el=$(selector); if(el && value !== undefined) el.textContent=value; }function applyLanguage(){  const t=languageText[currentLanguage];  document.documentElement.lang=currentLanguage === "hi" ? "hi" : "en";  setText("startBtn",t.start);   const subtitle=document.querySelector(".welcome-card .subtitle"); if(subtitle) subtitle.textContent=t.welcomeSubtitle;  const smart=document.querySelector(".welcome-card [style*='Smart food guidance']"); if(smart) smart.textContent=t.smartGuidance;  const desc=document.querySelector(".welcome-card p[style*='font-size:13px']"); if(desc) desc.textContent=t.welcomeDescription;  setText("scanBtn",t.scanProduct); setText("lookupBtn",t.lookup);  const hero=document.querySelector(".hero h2"); if(hero) hero.textContent=t.knowFood;  const heroP=document.querySelector(".hero p"); if(heroP) heroP.textContent=t.heroText;  const heroScore=document.querySelector(".hero h3"); if(heroScore) heroScore.textContent="FoodLens Score";  const heroScoreP=document.querySelector(".hero h3")?.nextElementSibling; if(heroScoreP) heroScoreP.textContent=t.scoreInfo;  const manual=document.querySelector(".manual-card h3"); if(manual) manual.textContent=t.manualTitle;  const titles=document.querySelectorAll(".screen > .section-title"); if(titles[0]) titles[0].textContent=t.checks;  const info=document.querySelectorAll(".info");  [[t.sugar,t.sugarInfo],[t.sodium,t.sodiumInfo],[t.fibre,t.fibreInfo],[t.protein,t.proteinInfo]].forEach((pair,i)=>{ if(info[i]){const b=info[i].querySelector('b'),sp=info[i].querySelector('span');if(b)b.textContent=pair[0];if(sp)sp.textContent=pair[1];}});  setText("scannerStatus",t.startingCamera);  const scannerTitle=document.querySelector("#scannerScreen h2"); if(scannerTitle) scannerTitle.textContent=t.scanBarcode;  setText("cameraRetry",t.restartCamera); setText("manualFromScanner",t.enterManually);  const navs=document.querySelectorAll(".nav-btn"); [t.home,t.history,t.didYouKnow,t.profile].forEach((x,i)=>{if(navs[i]) navs[i].innerHTML=navs[i].innerHTML.split("<br>")[0]+"<br>"+x;});  const resultTitle=document.querySelector("#resultScreen .section-title"); if(resultTitle) resultTitle.textContent=t.nutrition;  const nlabels=document.querySelectorAll("#resultScreen .nutrient h4"); [t.sugar,t.sodium,t.fibre,t.protein].forEach((x,i)=>{if(nlabels[i])nlabels[i].textContent=x;});  const rec=document.querySelector(".recommendation strong"); if(rec) rec.textContent=t.recommendation;  const freq=document.querySelector(".frequency strong"); if(freq) freq.textContent=t.consumption;  const extras=document.querySelectorAll(".extra b"); [t.calories,t.carbohydrates,t.totalFat,t.serving].forEach((x,i)=>{if(extras[i])extras[i].textContent=x;});  setText("scanAnother",t.scanAnother); setText("backHome",t.backHome);  const rf=document.querySelector(".result-feedback-title"); if(rf)rf.textContent=t.feedbackHelpful;  const rfb=document.querySelectorAll("[data-result-feedback]"); [t.helpful,t.notQuite,t.reportIssue].forEach((x,i)=>{if(rfb[i])rfb[i].textContent=x;});  setText("sendResultFeedback",t.sendFeedback); const rfta=$("resultFeedbackText"); if(rfta)rfta.placeholder=t.optionalComment;  const historyTitle=document.querySelector("#historyScreen h2"); if(historyTitle)historyTitle.textContent=t.scanHistory;  const historySub=document.querySelector("#historyScreen header div div"); if(historySub)historySub.textContent=t.recentResults;  setText("clearHistory",t.clear); const empty=$("emptyHistory"); if(empty)empty.textContent=t.noScans;  const didBrand=document.querySelector("#didYouKnowScreen .brand span"); if(didBrand)didBrand.textContent=t.didYouKnow;  const didSub=document.querySelector(".did-subtitle"); if(didSub)didSub.textContent=t.factsSubtitle;  const factHero=document.querySelector(".fact-hero h2"); if(factHero)factHero.textContent=t.factTitle;  const factIntro=document.querySelector(".fact-hero p"); if(factIntro)factIntro.textContent=t.factIntro;  const mythH=document.querySelector(".myth-section h2"); if(mythH)mythH.textContent=t.mythFact;  const mythBadge=document.querySelector(".myth-badge"); if(mythBadge)mythBadge.textContent=t.letsCheck;  const ig=document.querySelector(".ingredient-guide h2"); if(ig)ig.textContent=t.ingredientTitle;   const factCards=document.querySelectorAll(".fact-card"); (t.facts||[]).forEach((x,i)=>{if(factCards[i]){const h=factCards[i].querySelector("h3"),p=factCards[i].querySelector("p");if(h)h.textContent=x[0];if(p)p.textContent=x[1];}});  const mythCards=document.querySelectorAll(".myth-card"); (t.myths||[]).forEach((x,i)=>{if(mythCards[i]){const h=mythCards[i].querySelector("h3"),p=mythCards[i].querySelector("p");if(h)h.textContent=x[0];if(p)p.innerHTML="<strong>"+(currentLanguage==="hi"?"तथ्य:":"Fact:")+"</strong> "+x[1].replace(/^Fact:\s*/i,"").replace(/^तथ्य:\s*/i,"");}});  const ingredientRows=document.querySelectorAll(".ingredient-row"); (t.ingredients||[]).forEach((x,i)=>{if(ingredientRows[i]){const b=ingredientRows[i].querySelector("b"),sp=ingredientRows[i].querySelector("span");if(b)b.textContent=x[0];if(sp)sp.textContent=x[1];}});  const profileH=document.querySelector("#profileScreen h2"); if(profileH && ["Guest","अतिथि"].includes(profileH.textContent.trim())) profileH.textContent=t.guest;  const statLabels=document.querySelectorAll("#profileScreen .stat span"); [t.scans,t.averageScore,t.bestScore].forEach((x,i)=>{if(statLabels[i])statLabels[i].textContent=x;});  const guidance=document.querySelector("#profileScreen .recommendation strong"); if(guidance)guidance.textContent=t.guidanceTitle;  const utilH=document.querySelector("#profileScreen .utility-card h3"); if(utilH)utilH.textContent=t.more;  const feedbackUtility=$("feedbackBtn");
+  if(feedbackUtility){ const icon=feedbackUtility.querySelector(".utility-icon")?.textContent||"💬"; feedbackUtility.innerHTML='<span class="utility-icon">'+icon+'</span>'+t.feedback; }
+  const supportUtility=$("supportBtn");
+  if(supportUtility){ const icon=supportUtility.querySelector(".utility-icon")?.textContent||"🛠️"; supportUtility.innerHTML='<span class="utility-icon">'+icon+'</span>'+t.support; }
+  const languageUtility=$("languageBtn");
+  if(languageUtility){ const icon=languageUtility.querySelector(".utility-icon")?.textContent||"🇮🇳"; languageUtility.innerHTML='<span class="utility-icon">'+icon+'</span>'+t.language; }   const ft=$("feedbackTitle"); if(ft)ft.textContent=currentLanguage==="hi"?"अपना फीडबैक साझा करें":"Share your feedback";  const fp=document.querySelector("#feedbackModal > .modal-card > p"); if(fp)fp.textContent=currentLanguage==="hi"?"FoodLens का आपका अनुभव कैसा रहा?":"How was your FoodLens experience?";  const fopts=document.querySelectorAll("[data-feedback]"); [currentLanguage==="hi"?"😊 अच्छा":"😊 Great",currentLanguage==="hi"?"🙂 ठीक":"🙂 Okay",currentLanguage==="hi"?"🙁 सुधार चाहिए":"🙁 Needs work"].forEach((x,i)=>{if(fopts[i])fopts[i].textContent=x;});  const fta=$("feedbackText"); if(fta)fta.placeholder=currentLanguage==="hi"?"बताएं कि क्या अच्छा रहा या हम क्या बेहतर कर सकते हैं…":"Tell us what worked well or what we should improve...";  setText("sendFeedback",currentLanguage==="hi"?"फीडबैक भेजें":"Send Feedback"); setText("cancelFeedback",currentLanguage==="hi"?"रद्द करें":"Cancel");  const st=$("supportTitle"); if(st)st.textContent=currentLanguage==="hi"?"FoodLens टेक सपोर्ट":"FoodLens Tech Support";  const sp=document.querySelector("#supportModal > .modal-card > p"); if(sp)sp.textContent=currentLanguage==="hi"?"अगर कुछ काम नहीं कर रहा है, तो प्रोजेक्ट टीम से संपर्क करने से पहले ये आसान जाँच करें।":"If something is not working, try these quick checks before contacting the project team.";  setText("copySupportInfo",currentLanguage==="hi"?"सपोर्ट जानकारी कॉपी करें":"Copy support information");}document.querySelectorAll(".lang").forEach(btn=>{  btn.addEventListener("click",()=>{    document.querySelectorAll(".lang").forEach(x=>x.classList.remove("active"));    btn.classList.add("active");    currentLanguage = btn.dataset.lang;    applyLanguage();        toast(currentLanguage === "hi" ? "भाषा हिन्दी चुनी गई है।" : "English selected.");  });});/* ---------- Start ---------- */$("startBtn").addEventListener("click",()=>{  $("welcomeScreen").classList.add("hidden");  $("mainApp").classList.remove("hidden");  showScreen("homeScreen");});/* ---------- Barcode validation ---------- */function cleanBarcode(value){  return String(value || "").replace(/\D/g,"");}function validBarcode(value){  const code = cleanBarcode(value);  return code.length >= 8 && code.length <= 18;}/* ---------- Backend lookup ---------- */async function lookupBarcode(rawCode){  const code = cleanBarcode(rawCode);  if(!validBarcode(code)){    toast("Please enter a valid numeric barcode.");    return;  }  showLoader(true);  try{    const response = await fetch(      "/get_food_data?query=" + encodeURIComponent(code),      {        method:"GET",        headers:{Accept:"application/json"},        cache:"no-store"      }    );    let data;    try{      data = await response.json();    }catch(e){      throw new Error("The server returned an invalid response.");    }    if(!response.ok || data.error){      throw new Error(data.error || "Product could not be found.");    }    renderProduct(data);  }catch(error){    console.error(error);    toast(error.message || "Unable to connect to FoodLens.");  }finally{    showLoader(false);  }}/* ---------- Render product ---------- */function displayValue(value, unit){  if(value === null || value === undefined || value === ""){    return "Unavailable";  }  return String(value) + (unit ? " " + unit : "");}function renderProduct(data){  $("productName").textContent = data.name || "Unknown Product";  $("productBrand").textContent = data.brand ? "Brand: " + data.brand : "";  $("productBarcode").textContent = data.barcode ? "Barcode: " + data.barcode : "";  const img = $("productImage");  if(data.image){    img.src = data.image;    img.style.display = "block";    img.onerror = () => img.style.display = "none";  }else{    img.style.display = "none";  }  const fl = data.foodlens || data.health_assessment || {};  const score = fl.score;  $("scoreNumber").textContent =    (score === null || score === undefined) ? "—" : Number(score).toFixed(1);  $("scoreCategory").textContent = fl.category || languageText[currentLanguage].unavailable;  const scoreBox=$("scoreNumber").closest(".score-box");  if(scoreBox){    scoreBox.classList.remove("score-high","score-moderate","score-good");    const sc=Number(score);    if(Number.isFinite(sc)){ if(sc < 5){scoreBox.classList.add("score-high");} else if(sc < 7){scoreBox.classList.add("score-moderate");} else {scoreBox.classList.add("score-good");} }  }  const b = fl.breakdown || {};  const nutrientMap = [    ["sugar","Sugar","g/100g","sugarValue","sugarRating"],    ["sodium","Sodium","mg/100g","sodiumValue","sodiumRating"],    ["fibre","Fibre","g/100g","fibreValue","fibreRating"],    ["protein","Protein","g/100g","proteinValue","proteinRating"]  ];  nutrientMap.forEach(([key,label,unit,valueId,ratingId])=>{    const item = b[key] || {};    const valueEl=$(valueId), ratingEl=$(ratingId), card=valueEl?.closest(".nutrient");    valueEl.textContent = item.value === null || item.value === undefined ? languageText[currentLanguage].unavailable : displayValue(item.value, item.unit || unit);    const rating=item.rating || "";    ratingEl.textContent = rating || languageText[currentLanguage].unavailable;    if(card){      card.classList.remove("nutrient-high","nutrient-moderate","nutrient-good","nutrient-neutral");      const r=String(rating).toLowerCase();      let status="neutral", statusText=languageText[currentLanguage].unavailable;      if(/high|poor|bad|limit|very high|more/.test(r)){status="high";statusText=languageText[currentLanguage].high;}      else if(/moderate|medium|fair|average/.test(r)){status="moderate";statusText=languageText[currentLanguage].moderate;}      else if(/good|low|favourable|favorable|excellent|positive/.test(r)){status="good";statusText=languageText[currentLanguage].good;}      /* If the backend rating is absent, use a conservative sugar fallback only. */      if(!rating && key === "sugar" && item.value !== null && item.value !== undefined){        const v=Number(item.value);        if(Number.isFinite(v)){ if(v>22.5){status="high";statusText=languageText[currentLanguage].high;} else if(v>5){status="moderate";statusText=languageText[currentLanguage].moderate;} else {status="good";statusText=languageText[currentLanguage].good;} }      }      card.classList.add("nutrient-"+status);      let pill=card.querySelector(".status-pill");      if(!pill){pill=document.createElement("div");pill.className="status-pill";ratingEl.insertAdjacentElement("afterend",pill);}      pill.className="status-pill "+status;      pill.textContent=status==="high" ? "🔴 "+statusText : status==="moderate" ? "🟠 "+statusText : status==="good" ? "🟢 "+statusText : "⚪ "+statusText;      pill.setAttribute("aria-label",statusText);    }  });  $("recommendationText").textContent =    fl.recommendation ||    data.health_assessment?.recommendation ||    "No recommendation available.";  const cg = data.consumption_guidance || {};  $("frequencyText").textContent =    cg.display ||    "Unavailable";  const n = data.nutrition || {};  $("caloriesValue").textContent =    displayValue(n.calories_kcal_100g,"kcal/100g");  $("carbsValue").textContent =    displayValue(n.carbohydrates_g_100g,"g/100g");  $("fatValue").textContent =    displayValue(n.total_fat_g_100g,"g/100g");  const serving = data.serving_size || {};  $("servingValue").textContent =    serving.available      ? (serving.display || (serving.value_g + " g"))      : "Unavailable";  saveHistory({    barcode:data.barcode || "",    name:data.name || "Unknown Product",    brand:data.brand || "",    score:score,    date:new Date().toISOString()  });  updateHistory();  updateProfile();  showScreen("resultScreen");}/* ---------- Manual lookup ---------- */$("lookupBtn").addEventListener("click",()=>{  lookupBarcode($("barcodeInput").value);});$("barcodeInput").addEventListener("keydown",e=>{  if(e.key === "Enter"){    lookupBarcode($("barcodeInput").value);  }});/* ---------- Scanner ---------- */async function startScanner(){  showScreen("scannerScreen");  $("scannerStatus").textContent = "Starting camera…";  stopScanner();  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){    $("scannerStatus").textContent =      "Camera access is not available in this browser. Enter the barcode manually.";    return;  }  try{    currentStream = await navigator.mediaDevices.getUserMedia({      video:{        facingMode:{ideal:"environment"},        width:{ideal:1280},        height:{ideal:720}      },      audio:false    });    $("video").srcObject = currentStream;    await $("video").play();    scannerRunning = true;    if("BarcodeDetector" in window){      try{        barcodeDetector = new BarcodeDetector({          formats:[            "ean_13","ean_8","upc_a","upc_e",            "code_128","code_39","itf"          ]        });        $("scannerStatus").textContent =          "Scanning… point the camera at the barcode.";        scanWithBarcodeDetector();        return;      }catch(e){        barcodeDetector = null;      }    }    /*      BarcodeDetector is not supported in every browser,      especially Safari/iPhone versions. In that case we      keep the camera open and provide manual entry rather      than pretending that automatic detection is working.    */    $("scannerStatus").textContent =      "Camera is ready. If automatic detection is unavailable, use Enter Manually.";  }catch(error){    console.error(error);    if(error.name === "NotAllowedError"){      $("scannerStatus").textContent =        "Camera permission was denied. Allow camera access in your browser settings, then try again.";    }else{      $("scannerStatus").textContent =        "Camera could not be started. Use Enter Manually.";    }  }}async function scanWithBarcodeDetector(){  if(!scannerRunning || !barcodeDetector) return;  try{    const codes = await barcodeDetector.detect($("video"));    if(codes && codes.length){      const raw = codes[0].rawValue || "";      const code = cleanBarcode(raw);      if(validBarcode(code)){        scannerRunning = false;        $("scannerStatus").textContent = "Barcode detected: " + code;        stopScanner();        await lookupBarcode(code);        return;      }    }  }catch(error){    console.warn("Barcode detection error:",error);  }  scanLoopId = requestAnimationFrame(scanWithBarcodeDetector);}function stopScanner(){  scannerRunning = false;  if(scanLoopId){    cancelAnimationFrame(scanLoopId);    scanLoopId = null;  }  if(currentStream){    currentStream.getTracks().forEach(track=>track.stop());    currentStream = null;  }  if($("video")){    $("video").srcObject = null;  }}$("scanBtn").addEventListener("click",startScanner);$("closeScanner").addEventListener("click",()=>{  stopScanner();  showScreen("homeScreen");});$("cameraRetry").addEventListener("click",startScanner);$("manualFromScanner").addEventListener("click",()=>{  stopScanner();  showScreen("homeScreen");  $("barcodeInput").focus();  toast("Enter the barcode digits manually.");});/* ---------- Result navigation ---------- */$("scanAnother").addEventListener("click",startScanner);$("backHome").addEventListener("click",()=>{  showScreen("homeScreen");});window.addEventListener("pagehide",stopScanner);/* ---------- History ---------- */function updateHistory(){  const history = getHistory();  const list = $("historyList");  const empty = $("emptyHistory");  list.innerHTML = "";  empty.classList.toggle("hidden",history.length !== 0);  history.forEach(item=>{    const row = document.createElement("div");    row.className = "history-item card";    const date = item.date      ? new Date(item.date).toLocaleDateString()      : "";    row.innerHTML = `      <div>        <h4>${escapeHtml(item.name)}</h4>        <p>${escapeHtml(item.brand || "")}${item.barcode ? " • " + escapeHtml(item.barcode) : ""} • ${escapeHtml(date)}</p>      </div>      <div class="history-score">        ${item.score === null || item.score === undefined ? "—" : Number(item.score).toFixed(1)}      </div>    `;    list.appendChild(row);  });}$("clearHistory").addEventListener("click",()=>{  if(confirm("Clear your FoodLens scan history?")){    localStorage.removeItem("foodlens_history");    updateHistory();    updateProfile();  }});/* ---------- Profile ---------- */function updateProfile(){  const history = getHistory();  $("scanCount").textContent = history.length;  if(!history.length){    $("avgScore").textContent = "—";    $("bestScore").textContent = "—";    $("profileGuidance").textContent =      "Scan products to build your personal history.";    return;  }  const scores = history    .map(x => Number(x.score))    .filter(x => Number.isFinite(x));  if(scores.length){    const avg = scores.reduce((a,b)=>a+b,0)/scores.length;    const best = Math.max(...scores);    $("avgScore").textContent = avg.toFixed(1);    $("bestScore").textContent = best.toFixed(1);    if(avg >= 8.5){      $("profileGuidance").textContent =        "Your recent scans show a generally favourable nutritional profile.";    }else if(avg >= 7){      $("profileGuidance").textContent =        "Your recent choices are generally favourable, with room for balance.";    }else if(avg >= 5){      $("profileGuidance").textContent =        "Your recent choices are mixed. Check the highlighted nutrients when choosing products.";    }else{      $("profileGuidance").textContent =        "Many recent products have lower FoodLens scores. Consider limiting highly processed or nutrient-poor choices.";    }  }}/* ---------- Navigation ---------- */document.querySelectorAll(".nav-btn").forEach(btn=>{  btn.addEventListener("click",()=>{    stopScanner();    showScreen(btn.dataset.screen);    if(btn.dataset.screen === "historyScreen") updateHistory();    if(btn.dataset.screen === "profileScreen") updateProfile();  });});/* ---------- Welcome accessibility & product-result feedback ---------- */let fontScale = 1;function applyFontScale(){  document.documentElement.style.setProperty("--font-scale", fontScale);  document.body.style.fontSize = (16 * fontScale) + "px";  if($("fontSizeValue")) $("fontSizeValue").textContent = Math.round(fontScale * 100) + "%";}$("fontMinusBtn")?.addEventListener("click",()=>{  fontScale = Math.max(0.85, +(fontScale - 0.05).toFixed(2));  applyFontScale();});$("fontPlusBtn")?.addEventListener("click",()=>{  fontScale = Math.min(1.35, +(fontScale + 0.05).toFixed(2));  applyFontScale();});let selectedResultFeedback = "";document.querySelectorAll("[data-result-feedback]").forEach(btn=>{  btn.addEventListener("click",()=>{    document.querySelectorAll("[data-result-feedback]").forEach(x=>x.classList.remove("active"));    btn.classList.add("active");    selectedResultFeedback = btn.dataset.resultFeedback;  });});$("sendResultFeedback").addEventListener("click",()=>{  if(!selectedResultFeedback && !$("resultFeedbackText").value.trim()){    toast("Please select a feedback option or add a comment.");    return;  }  const product = $("productName").textContent || "Unknown Product";  const payload = [    "FoodLens Product Feedback",    "Product: " + product,    "Barcode: " + ($("productBarcode").textContent || ""),    "Feedback: " + (selectedResultFeedback || "Comment only"),    "Comment: " + ($("resultFeedbackText").value.trim() || "None")  ].join("\n");  try{    const existing = JSON.parse(localStorage.getItem("foodlens_result_feedback") || "[]");    existing.unshift({payload, date:new Date().toISOString()});    localStorage.setItem("foodlens_result_feedback", JSON.stringify(existing.slice(0,50)));  }catch(e){}  selectedResultFeedback = "";  document.querySelectorAll("[data-result-feedback]").forEach(x=>x.classList.remove("active"));  $("resultFeedbackText").value = "";  toast("Thank you — your feedback has been recorded on this device.");});/* ---------- Feedback / support / language / read aloud ---------- */function openModal(id){ $(id).classList.remove("hidden"); }function closeModal(id){ $(id).classList.add("hidden"); }document.querySelectorAll("[data-feedback]").forEach(btn=>{  btn.addEventListener("click",()=>{    document.querySelectorAll("[data-feedback]").forEach(x=>x.classList.remove("active"));    btn.classList.add("active");    window.__selectedFeedback = btn.dataset.feedback;  });});if($("feedbackBtn")){
+  $("feedbackBtn").addEventListener("click",(e)=>{
+    e.preventDefault();
+    e.stopPropagation();
+    openModal("feedbackModal");
+  });
+}$("closeFeedback").addEventListener("click",()=>closeModal("feedbackModal"));$("cancelFeedback").addEventListener("click",()=>closeModal("feedbackModal"));$("sendFeedback").addEventListener("click",()=>{  const type = window.__selectedFeedback || "General feedback";  const text = $("feedbackText").value.trim();  if(!text && type === "General feedback"){    toast("Please select a rating or write some feedback.");    return;  }  const payload = ["FoodLens Feedback","Rating: " + type,"Comment: " + (text || "No additional comment.")].join("\n");  try{ localStorage.setItem("foodlens_last_feedback", payload); }catch(e){}  $("feedbackText").value = "";  document.querySelectorAll("[data-feedback]").forEach(x=>x.classList.remove("active"));  window.__selectedFeedback = "";  closeModal("feedbackModal");  toast("Thank you — your feedback has been recorded on this device.");});$("supportBtn").addEventListener("click",()=>openModal("supportModal"));$("closeSupport").addEventListener("click",()=>closeModal("supportModal"));$("copySupportInfo").addEventListener("click",async()=>{  const info = ["FoodLens Tech Support","Browser: " + navigator.userAgent,"Page: " + window.location.href,"Time: " + new Date().toISOString()].join("\n");  try{    await navigator.clipboard.writeText(info);    $("supportStatus").textContent = "Support information copied. You can paste it into your project team's support chat/email.";  }catch(e){    $("supportStatus").textContent = info;  }});document.querySelectorAll(".modal").forEach(modal=>{  modal.addEventListener("click",e=>{ if(e.target === modal) modal.classList.add("hidden"); });});document.addEventListener("keydown",e=>{  if(e.key === "Escape"){    closeModal("feedbackModal");    closeModal("supportModal");  }});/* ---------- Security helper ---------- */function escapeHtml(value){  return String(value ?? "")    .replace(/&/g,"&amp;")    .replace(/</g,"&lt;")    .replace(/>/g,"&gt;")    .replace(/"/g,"&quot;")    .replace(/'/g,"&#039;");}/* ---------- Initial state ---------- */applyLanguage();updateHistory();updateProfile();</script>
+
+
+<script>
+/* FoodLens: LANGUAGE ONLY — English / हिन्दी */
+(function () {
+  function getLang() {
+    return (typeof currentLanguage !== "undefined" && currentLanguage === "hi") ? "hi" : "en";
+  }
+
+  function updateWelcomeLanguage() {
+    var lang = getLang();
+    var btn = document.getElementById("languageButton");
+    var title = document.getElementById("welcomeTitle");
+    var start = document.getElementById("startBtn");
+
+    if (btn) btn.textContent = lang === "hi" ? "🌐 हिन्दी" : "🌐 English";
+
+    if (title) {
+      title.innerHTML = lang === "hi"
+        ? "अपने भोजन को जानें।<br><span>बेहतर चुनें।</span>"
+        : "Know your food.<br><span>Choose better.</span>";
+    }
+
+    if (start) {
+      start.textContent = lang === "hi" ? "FoodLens पर जाएँ" : "Continue to FoodLens";
+    }
+
+    document.documentElement.lang = lang === "hi" ? "hi" : "en";
+
+    document.querySelectorAll("#operationalLanguageChoices .lang").forEach(function (b) {
+      b.classList.toggle("active", b.dataset.lang === lang);
+    });
+  }
+
+  window.toggleVisualLanguage = function () {
+    var next = getLang() === "en" ? "hi" : "en";
+    try { currentLanguage = next; } catch (e) {}
+    if (typeof applyLanguage === "function") applyLanguage();
+    updateWelcomeLanguage();
+  };
+
+  document.addEventListener("DOMContentLoaded", function () {
+    updateWelcomeLanguage();
+  });
+
+  /* Keep the language button working even if the original inline handler is removed later. */
+  var languageButton = document.getElementById("languageButton");
+  if (languageButton) {
+    languageButton.onclick = function (e) {
+      e.preventDefault();
+      window.toggleVisualLanguage();
+    };
+  }
+
+  updateWelcomeLanguage();
+})();
+</script>
+
+<script>
+(function(){
+  function fixGuestFeedback(){
+    var b=document.getElementById("feedbackBtn");
+    if(b && (!b.textContent || b.textContent.toLowerCase().indexOf("undefined")!==-1)){
+      b.innerHTML='<span class="utility-icon">💬</span>'+((typeof currentLanguage!=="undefined" && currentLanguage==="hi")?"फीडबैक दें":"Give feedback");
+    }
+  }
+  document.addEventListener("DOMContentLoaded",fixGuestFeedback);
+  fixGuestFeedback();
+})();
+</script></body></html>
